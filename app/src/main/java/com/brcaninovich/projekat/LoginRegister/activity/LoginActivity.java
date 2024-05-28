@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.brcaninovich.projekat.LoginRegister.fragments.LoginFragment;
 import com.brcaninovich.projekat.R;
+import com.google.firebase.FirebaseApp;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -15,6 +16,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

@@ -25,9 +25,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
         loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
-
         bindComponents(view);
-
 
         loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), loginResult -> {
             if (loginResult) {
@@ -36,17 +34,14 @@ public class LoginFragment extends Fragment {
                 Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
         return view;
     }
 
     private void bindComponents(View view) {
-        EditText usernameEditText = view.findViewById(R.id.username);
-        EditText passwordEditText = view.findViewById(R.id.password);
+        EditText usernameEditText = view.findViewById(R.id.login_email);
+        EditText passwordEditText = view.findViewById(R.id.login_password);
         Button loginButton = view.findViewById(R.id.login_button);
-        TextView registerLink = view.findViewById(R.id.register_link);
+        TextView registerLink = view.findViewById(R.id.login_link);
 
         loginButton.setOnClickListener(v -> {
             String username = usernameEditText.getText().toString();
@@ -55,12 +50,15 @@ public class LoginFragment extends Fragment {
         });
 
         registerLink.setOnClickListener(v -> {
-            // Replace LoginFragment with RegisterFragment
-            FragmentManager fragmentManager = getParentFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, new RegisterFragment());
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
+           changeToRegisterFragment();
         });
+
+    }
+    private void changeToRegisterFragment() {
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, new RegisterFragment());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 }

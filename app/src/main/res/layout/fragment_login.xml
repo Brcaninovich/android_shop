@@ -44,7 +44,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/username"
+                android:id="@+id/login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto" />
@@ -68,7 +68,7 @@
             app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/password"
+                android:id="@+id/login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
@@ -79,12 +79,12 @@
 
 
         <CheckBox
-            android:id="@+id/rememberMeCheckBox"
+            android:id="@+id/login_rememberMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:fontFamily="@font/roboto"
-            android:text="Remember Me"
+            android:text="@string/remember_me"
             app:layout_constraintTop_toBottomOf="@id/outlinedTextFieldPassword"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="10dp" />
@@ -94,12 +94,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:text="Forgot Password"
+            android:text="@string/forgot_password"
             android:fontFamily="@font/roboto"
             android:textColor="#1976D1"
-            app:layout_constraintBottom_toBottomOf="@+id/rememberMeCheckBox"
+            app:layout_constraintBottom_toBottomOf="@+id/login_rememberMe"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rememberMeCheckBox" />
+            app:layout_constraintTop_toTopOf="@+id/login_rememberMe" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/login_button"
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="@string/login_button_text"
             android:layout_marginTop="25dp"
-            app:layout_constraintTop_toBottomOf="@+id/rememberMeCheckBox"
+            app:layout_constraintTop_toBottomOf="@+id/login_rememberMe"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:elevation="15dp"
@@ -149,6 +149,7 @@
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/google_icon_test"
+                android:contentDescription="@string/google_signin_desc"
                  />
         </androidx.cardview.widget.CardView>
 
@@ -169,11 +170,11 @@
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
                 android:background="@drawable/facebook_icon"
-                 />
+                android:contentDescription="@string/facebook_signin_desc" />
         </androidx.cardview.widget.CardView>
 
         <TextView
-            android:id="@+id/register_link"
+            android:id="@+id/login_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/register_text"

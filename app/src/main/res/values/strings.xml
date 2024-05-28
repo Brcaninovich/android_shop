@@ -16,5 +16,9 @@
     <string name="login_forget_password_text">Forget Password</string>
     <string name="login_methods_text">od Sign in with</string>
     <string name="register_methods_text">od Sign up with</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="facebook_signin_desc">facebook_signin_desc</string>
+    <string name="google_signin_desc">google_signin_desc</string>
 
 </resources>

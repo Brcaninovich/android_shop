@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -8,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId "com.brcaninovich.projekat"
-        minSdk 21
-        targetSdk 34
+        minSdk 23
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -24,13 +25,10 @@ android {
     }
 
     buildFeatures {
-        viewBinding {
-            enabled = true
-        }
-        dataBinding {
-            enabled = true
-        }
+        viewBinding true
+        dataBinding true
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -45,9 +43,13 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel:2.5.1"
     implementation "androidx.lifecycle:lifecycle-livedata:2.5.1"
     implementation 'androidx.lifecycle:lifecycle-runtime:2.5.1'
-    implementation 'androidx.databinding:databinding-runtime:7.1.0'
+    implementation 'androidx.databinding:databinding-runtime:8.4.1'
     implementation 'androidx.navigation:navigation-fragment:2.7.6'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-auth:23.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
+apply plugin: 'com.google.gms.google-services'
