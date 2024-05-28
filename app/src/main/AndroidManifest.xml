@@ -4,8 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
-
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -17,6 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projekat"
         tools:targetApi="31">
+        <activity
+            android:name=".MainApplication.StartActivity"
+            android:exported="false"
+            android:label="@string/title_activity_start">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <activity
             android:name=".LoginRegister.activity.LoginActivity"
             android:exported="false">
@@ -42,7 +48,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
-
-
 
 </manifest>

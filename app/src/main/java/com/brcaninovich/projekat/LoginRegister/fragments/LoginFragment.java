@@ -4,6 +4,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brcaninovich.projekat.LoginRegister.model.LoginViewModel;
+import com.brcaninovich.projekat.MainApplication.StartActivity;
 import com.brcaninovich.projekat.R;
 
 public class LoginFragment extends Fragment {
@@ -30,6 +33,9 @@ public class LoginFragment extends Fragment {
         loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), loginResult -> {
             if (loginResult) {
                 Toast.makeText(getActivity(), "Login Successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), StartActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             } else {
                 Toast.makeText(getActivity(), "Login Failed", Toast.LENGTH_SHORT).show();
             }
