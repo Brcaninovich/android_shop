@@ -22,4 +22,14 @@
         android:name="com.brcaninovich.projekat.MainApplication.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_messages"
+        android:name="com.brcaninovich.projekat.MainApplication.ui.messages.MessagesFragment"
+        android:label="@string/title_messages"
+        tools:layout="@layout/fragment_messages" />
+    <fragment
+        android:id="@+id/navigation_user"
+        android:name="com.brcaninovich.projekat.MainApplication.ui.user.UserFragment"
+        android:label="@string/title_user"
+        tools:layout="@layout/fragment_user" />
 </navigation>
