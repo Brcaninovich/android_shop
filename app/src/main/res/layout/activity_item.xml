@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ItemActivity.ItemActivity">
+
+    <TextView
+        android:id="@+id/itemTopNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/pocetna"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:fontFamily="@font/roboto"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/white"
+        android:background="#1976D1"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewHolderPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/itemTopNameTextView"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginLeft="32dp"
+        app:cardCornerRadius="30dp"
+        android:elevation="25dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewAddPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:backgroundTint="#9A9A9A"
+            android:layout_margin="15dp"
+            app:cardCornerRadius="15dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/itemImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/backButtonImageView"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:paddingStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+
+                <ImageView
+                    android:id="@+id/nextButtonImageView"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:paddingStart="10dp"
+                    android:rotation="180"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/itemPriceTextViewHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cijena proizvoda"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewHolderPhoto"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="32dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/itemPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cijena proizvoda"
+        app:layout_constraintTop_toBottomOf="@+id/itemPriceTextViewHolder"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/itemDescTextViewHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opis proizvoda"
+        app:layout_constraintTop_toBottomOf="@+id/itemPriceTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="32dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/itemDescTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Opis proizvoda"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescTextViewHolder"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/itemLocTextViewHolder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lokacija"
+        app:layout_constraintTop_toBottomOf="@+id/itemDescTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="32dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/itemLocTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lokacija"
+        app:layout_constraintTop_toBottomOf="@+id/itemLocTextViewHolder"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="32dp"
+        android:fontFamily="@font/roboto"
+        android:textSize="22sp"
+        android:textColor="@color/black"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/msng_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Posalji poruku prodavcu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        android:elevation="15dp"
+        android:backgroundTint="#1976D1"
+        android:fontFamily="@font/roboto"
+        app:cornerRadius="10dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

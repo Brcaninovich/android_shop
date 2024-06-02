@@ -31,5 +31,8 @@
     <string name="opis_artikla">Opis artikla</string>
     <string name="cijena_artikla">Cijena artikla</string>
     <string name="dodaj_artikal">Dodaj artikal</string>
+    <string name="pocetna">POČETNA</string>
+    <string name="title_pretraga">Pretraga</string>
+    <string name="fragment_pretraga">PRETRAGA</string>
 
 </resources>
