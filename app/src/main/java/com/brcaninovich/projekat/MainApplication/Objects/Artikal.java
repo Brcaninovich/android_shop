@@ -12,12 +12,13 @@ public class Artikal {
     private String kategorija;
     private String stanje;
     private String lokacija;
+    private String dodaoKorisnik;
 
     public Artikal() {
         // Default constructor required for calls to DataSnapshot.getValue(Artikal.class)
     }
 
-    public Artikal(String id, String nazivArtikla, List<String> slike, String opisArtikla, String cijena, String kategorija, String stanje, String lokacija) {
+    public Artikal(String id, String nazivArtikla, List<String> slike, String opisArtikla, String cijena, String kategorija, String stanje, String lokacija, String dodaoKorisnik) {
         this.id = id;
         this.nazivArtikla = nazivArtikla;
         this.slike = slike;
@@ -26,6 +27,15 @@ public class Artikal {
         this.kategorija = kategorija;
         this.stanje = stanje;
         this.lokacija = lokacija;
+        this.dodaoKorisnik = dodaoKorisnik;
+    }
+
+    public String getDodaoKorisnik() {
+        return dodaoKorisnik;
+    }
+
+    public void setDodaoKorisnik(String dodaoKorisnik) {
+        this.dodaoKorisnik = dodaoKorisnik;
     }
 
     // Getters and setters

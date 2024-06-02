@@ -10,7 +10,112 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="100dp">
+        android:paddingBottom="100dp"
+        android:paddingTop="32dp">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewHolderPhoto2"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/cardViewHolderPhoto"
+            android:layout_margin="32dp"
+            app:cardCornerRadius="30dp"
+            android:elevation="25dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewAddPhoto2"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:backgroundTint="#9A9A9A"
+                android:layout_margin="15dp"
+                app:cardCornerRadius="15dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/addNewImageButton2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <ImageView
+                        android:id="@+id/photoHolderImageView2"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintVertical_bias="0.5"
+                        app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewHolderPhoto3"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/cardViewHolderPhoto2"
+            android:layout_margin="32dp"
+            app:cardCornerRadius="30dp"
+            android:elevation="25dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewAddPhoto3"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:backgroundTint="#9A9A9A"
+                android:layout_margin="15dp"
+                app:cardCornerRadius="15dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/addNewImageButton3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <ImageView
+                        android:id="@+id/photoHolderImageView3"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintVertical_bias="0.5"
+                        app:srcCompat="@drawable/ic_baseline_add_photo_alternate_24" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardViewHolderPhoto"
@@ -18,17 +123,18 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardViewHolderPhoto2"
+            android:layout_marginTop="32dp"
             android:layout_marginRight="32dp"
             android:layout_marginLeft="32dp"
-            android:layout_marginTop="32dp"
             app:cardCornerRadius="30dp"
             android:elevation="25dp">
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardViewAddPhoto"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:backgroundTint="#8A676767"
+                android:backgroundTint="#9A9A9A"
                 android:layout_margin="15dp"
                 app:cardCornerRadius="15dp">
 
@@ -38,6 +144,14 @@
 
                     <ImageView
                         android:id="@+id/addNewImageButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        />
+
+                    <ImageView
+                        android:id="@+id/photoHolderImageView"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
                         app:layout_constraintBottom_toBottomOf="parent"
