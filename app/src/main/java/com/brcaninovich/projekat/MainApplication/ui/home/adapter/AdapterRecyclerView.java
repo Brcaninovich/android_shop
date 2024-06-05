@@ -18,9 +18,8 @@ import java.util.List;
 public class AdapterRecyclerView extends RecyclerView.Adapter<AdapterRecyclerView.ViewHolder> {
 
     private List<Artikal> data = new ArrayList<>();
-    private OnItemClickListener onItemClickListener; // Dodaj polje za cuvanje listenera
+    private OnItemClickListener onItemClickListener;
 
-    // Dodaj setter metod za postavljanje listenera
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.onItemClickListener = listener;
     }

@@ -1,39 +1,43 @@
 package com.brcaninovich.projekat.MainApplication.ui.messages;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.brcaninovich.projekat.databinding.FragmentMessagesBinding;
-import com.brcaninovich.projekat.databinding.FragmentNotificationsBinding;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.brcaninovich.projekat.R;
+import java.util.List;
 
 public class MessagesFragment extends Fragment {
 
-    private FragmentMessagesBinding binding;
+    private MessagesViewModel messagesViewModel;
+    private RecyclerView recyclerViewChats;
+    private ChatAdapter chatAdapter;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        MessagesViewModel messagesViewModel =
-                new ViewModelProvider(this).get(MessagesViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_messages, container, false);
 
-        binding = FragmentMessagesBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        recyclerViewChats = root.findViewById(R.id.recyclerViewChats);
+        recyclerViewChats.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        final TextView textView = binding.textNotifications;
-        messagesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        messagesViewModel = new ViewModelProvider(this).get(MessagesViewModel.class);
+        messagesViewModel.getChatListLiveData().observe(getViewLifecycleOwner(), chatList -> {
+            if (chatList != null) {
+                setupRecyclerView(chatList);
+            }
+        });
+
         return root;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    private void setupRecyclerView(List<Chat> chatList) {
+        chatAdapter = new ChatAdapter(chatList, getContext());
+        recyclerViewChats.setAdapter(chatAdapter);
     }
 }

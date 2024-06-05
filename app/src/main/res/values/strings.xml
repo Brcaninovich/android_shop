@@ -34,5 +34,6 @@
     <string name="pocetna">POČETNA</string>
     <string name="title_pretraga">Pretraga</string>
     <string name="fragment_pretraga">PRETRAGA</string>
+    <string name="logout">Logout</string>
 
 </resources>

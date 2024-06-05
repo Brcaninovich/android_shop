@@ -46,7 +46,6 @@ public class HomeFragment extends Fragment implements OnItemClickListener {
         artikliList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
 
-        // Dohvat podataka iz Firestore-a
         db.collection("artikli")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -66,17 +65,15 @@ public class HomeFragment extends Fragment implements OnItemClickListener {
                     }
                 });
 
-        adapter.setOnItemClickListener(this); // Postavljanje listenera na adapter
+        adapter.setOnItemClickListener(this);
 
         return root;
     }
 
     @Override
     public void onItemClick(Artikal artikal) {
-        // Ovde definisati šta se dešava kada korisnik klikne na stavku
-        // Na primer, otvori novu aktivnost za prikaz detalja o artiklu
         Intent intent = new Intent(getContext(), ItemActivity.class);
-        intent.putExtra("ARTIKAL_ID", artikal.getId()); // Prosledi ID artikla na sledeću aktivnost
+        intent.putExtra("ARTIKAL_ID", artikal.getId());
         startActivity(intent);
     }
 

@@ -29,11 +29,9 @@ public class LoginViewModel extends ViewModel {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Prijava uspešna
                             FirebaseUser user = mAuth.getCurrentUser();
                             loginResult.setValue(true);
                         } else {
-                            // Prijava neuspešna
                             Log.w("LoginViewModel", "signInWithEmail:failure", task.getException());
                             loginResult.setValue(false);
                         }

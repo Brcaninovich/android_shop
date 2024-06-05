@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainApplication.ui.home.HomeFragment">
+    tools:context=".MainApplication.ui.home.HomeFragment"
+    android:paddingBottom="50dp">
 
     <TextView
         android:id="@+id/homeTopTextView"
@@ -26,6 +27,7 @@
         android:id="@+id/homeRecyclerView"
         app:layout_constraintTop_toBottomOf="@id/homeTopTextView"
         app:layout_constraintBottom_toBottomOf="parent"
+
         />
 
 

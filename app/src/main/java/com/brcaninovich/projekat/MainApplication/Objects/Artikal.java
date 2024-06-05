@@ -15,7 +15,6 @@ public class Artikal {
     private String dodaoKorisnik;
 
     public Artikal() {
-        // Default constructor required for calls to DataSnapshot.getValue(Artikal.class)
     }
 
     public Artikal(String id, String nazivArtikla, List<String> slike, String opisArtikla, String cijena, String kategorija, String stanje, String lokacija, String dodaoKorisnik) {
@@ -38,7 +37,6 @@ public class Artikal {
         this.dodaoKorisnik = dodaoKorisnik;
     }
 
-    // Getters and setters
     public String getId() {
         return id;
     }

@@ -3,6 +3,7 @@ package com.brcaninovich.projekat;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -15,15 +16,23 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private static final String PREFS_NAME = "MyPrefsFile";
+    private static final String KEY_REMEMBER_ME = "remember_me";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         FirebaseApp.initializeApp(this);
         mAuth = FirebaseAuth.getInstance();
+
+        SharedPreferences prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        boolean rememberMe = prefs.getBoolean(KEY_REMEMBER_ME, false);
+
+        if (!rememberMe) {
+            mAuth.signOut();
+        }
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -38,6 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 finish();
             }
-        }, 5000);
+        }, 3000);
     }
 }

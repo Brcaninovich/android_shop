@@ -5,87 +5,123 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brcaninovich.projekat.MainApplication.Objects.Artikal;
+import com.brcaninovich.projekat.MessageActivity.MessageActivity;
 import com.brcaninovich.projekat.R;
+import com.brcaninovich.projekat.databinding.ActivityItemBinding;
 import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ItemActivity extends AppCompatActivity {
 
     private ItemViewModel viewModel;
-    private FirebaseFirestore db;
-    private ImageView itemImageView;
-    private ImageView backButtonImageView;
-    private ImageView nextButtonImageView;
+    private ActivityItemBinding binding;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item);
+        binding = ActivityItemBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         viewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        db = FirebaseFirestore.getInstance();
-
-        itemImageView = findViewById(R.id.itemImageView);
-        backButtonImageView = findViewById(R.id.backButtonImageView);
-        nextButtonImageView = findViewById(R.id.nextButtonImageView);
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         String artikalId = getIntent().getStringExtra("ARTIKAL_ID");
 
-        db.collection("artikli").document(artikalId)
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        Artikal artikal = documentSnapshot.toObject(Artikal.class);
-                        if (artikal != null) {
-                            viewModel.setArtikal(artikal);
-                        } else {
-                            Toast.makeText(ItemActivity.this, "Artikal ne postoji", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ItemActivity.this, "Greška pri dohvatu artikla", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        viewModel.fetchArtikal(artikalId);
 
         viewModel.getArtikal().observe(this, new Observer<Artikal>() {
             @Override
             public void onChanged(Artikal artikal) {
-                updateUI(artikal);
-                setupImageButtons(artikal);
+                if (artikal != null) {
+                    updateUI(artikal);
+                    setupImageButtons(artikal);
+                    checkIfUserCreatedArtikal(artikal);
+                } else {
+                    Toast.makeText(ItemActivity.this, "Artikal ne postoji", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        binding.msngButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handleButtonClick();
             }
         });
     }
 
-    private void updateUI(Artikal artikal) {
-        TextView itemNameTextView = findViewById(R.id.itemTopNameTextView);
-        TextView itemPriceTextView = findViewById(R.id.itemPriceTextView);
-        TextView itemDescTextView = findViewById(R.id.itemDescTextView);
-        TextView itemLocTextView = findViewById(R.id.itemLocTextView);
+    private void handleButtonClick() {
+        Artikal artikal = viewModel.getArtikal().getValue();
+        if (artikal != null) {
+            if (artikal.getDodaoKorisnik().equals(currentUser.getUid())) {
+                deleteArtikal(artikal.getId());
+            } else {
+                sendMessage();
+            }
+        }
+    }
 
-        itemNameTextView.setText(artikal.getNazivArtikla());
-        itemPriceTextView.setText(artikal.getCijena());
-        itemDescTextView.setText(artikal.getOpisArtikla());
-        itemLocTextView.setText(artikal.getLokacija());
+    private void sendMessage() {
+        Artikal artikal = viewModel.getArtikal().getValue();
+        if (artikal != null && artikal.getDodaoKorisnik() != null) {
+            String receiverId = artikal.getDodaoKorisnik();
+            String currentUserId = currentUser.getUid();
+            String chatId = viewModel.generateChatId(currentUserId, receiverId);
+
+            Intent intent = new Intent(ItemActivity.this, MessageActivity.class);
+            intent.putExtra("receiverId", receiverId);
+            intent.putExtra("chatId", chatId);
+            intent.putExtra("artikalId", artikal.getId());
+            intent.putExtra("nazivArtikla", artikal.getNazivArtikla());
+            startActivity(intent);
+        } else {
+            Toast.makeText(ItemActivity.this, "Nema podataka o prodavcu", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void deleteArtikal(String artikalId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("artikli").document(artikalId)
+                .delete()
+                .addOnSuccessListener(aVoid -> {
+                    Toast.makeText(ItemActivity.this, "Artikal uspješno obrisan", Toast.LENGTH_SHORT).show();
+                    finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(ItemActivity.this, "Greška pri brisanju artikla", Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void checkIfUserCreatedArtikal(Artikal artikal) {
+        if (artikal.getDodaoKorisnik().equals(currentUser.getUid())) {
+            binding.msngButton.setText("Obriši artikal");
+        } else {
+            binding.msngButton.setText("Pošalji poruku");
+        }
+    }
+
+    private void updateUI(Artikal artikal) {
+        binding.itemTopNameTextView.setText(artikal.getNazivArtikla());
+        binding.itemPriceTextView.setText(artikal.getCijena());
+        binding.itemDescTextView.setText(artikal.getOpisArtikla());
+        binding.itemLocTextView.setText(artikal.getLokacija());
+        updateItemImage(artikal);
     }
 
     private void setupImageButtons(Artikal artikal) {
-        backButtonImageView.setOnClickListener(new View.OnClickListener() {
+        binding.backButtonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int currentIndex = viewModel.getCurrentImageIndex();
@@ -98,7 +134,7 @@ public class ItemActivity extends AppCompatActivity {
             }
         });
 
-        nextButtonImageView.setOnClickListener(new View.OnClickListener() {
+        binding.nextButtonImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int currentIndex = viewModel.getCurrentImageIndex();
@@ -111,8 +147,6 @@ public class ItemActivity extends AppCompatActivity {
                 }
             }
         });
-
-        updateItemImage(artikal);
     }
 
     private void updateItemImage(Artikal artikal) {
@@ -122,6 +156,6 @@ public class ItemActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(currentImage)
-                .into(itemImageView);
+                .into(binding.itemImageView);
     }
 }
